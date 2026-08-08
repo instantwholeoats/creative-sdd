@@ -23,8 +23,9 @@ description: 原稿を変更せずEditorとしてMechanical、Creative Contract�
 1. `AGENTS.md`、対象原稿、`.creative/work/spec.md`、対応task、対応Outline Unitを読む。
 2. 関連するDesign、continuity、必要なcanon、関連Summaryだけを読む。
 3. 既存ReviewとGit差分があれば、今回の原稿範囲を特定するために読む。
-4. `spec.md`の`status`が`approved`であることを確認する。
-5. 対象原稿がない、対応taskを特定できない、taskが未完了、またはSpecが未承認ならReviewを作らない。
+4. Specの`work_type`に対応する`../../../profiles/fiction.md`または`../../../profiles/blog.md`を読み、今回のReviewに関係する観点だけを参照する。
+5. `spec.md`の`status`が`approved`であることを確認する。
+6. 対象原稿がない、対応taskを特定できない、taskが未完了、またはSpecが未承認ならReviewを作らない。
 
 執筆時の会話や自己説明を評価根拠にせず、保存済みartifactと現在の原稿を根拠にする。Planがdrift reconciliationで`draft`へ戻っていても、既に存在する原稿はレビューできる。
 

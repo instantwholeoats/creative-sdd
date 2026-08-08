@@ -24,6 +24,7 @@ description: Discoveryで得たCreative Briefをfictionまたはblog向けのCre
 3. `.creative/work/spec.md`があれば全文を読む。
 4. 最新のユーザー指示を読み、既存artifactより優先する。
 5. 現在の会話から、ユーザーがbriefの現在の理解を確認した、または明示的にCreative Specの作成を依頼したことを確認する。
+6. 作品種別に対応する`../../../profiles/fiction.md`または`../../../profiles/blog.md`を読み、Creative Contractに必要な観点だけを参照する。
 
 briefが存在しない、作品種別が`fiction`か`blog`か判断できない、または`BLOCKING`が残っている場合はspecを生成しない。最新のユーザー指示だけで解消できなければ、`creative-discovery`で必要なDiscoveryを続けるよう案内する。
 

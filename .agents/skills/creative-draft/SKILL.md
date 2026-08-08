@@ -28,7 +28,8 @@ description: 承認済みCreative Specと承認済みPlanに従って一つのWr
 5. 対象taskに対応する`.creative/work/outline.md`のUnitだけを読む。
 6. `.creative/work/continuity.md`があれば読む。
 7. 対象taskに必要な`.creative/work/canon/`のファイルと過去のUnit Summaryだけを読む。
-8. 最新のユーザー指示を既存artifactより優先する。
+8. Specの`work_type`に対応する`../../../profiles/fiction.md`または`../../../profiles/blog.md`を読み、対象taskに関係する観点だけを参照する。
+9. 最新のユーザー指示を既存artifactより優先する。
 
 `spec.md`がない、Specの`status`が`approved`でない、Plan artifactが不足している、または`design.md`のfrontmatterにあるPlanの`status`が`approved`でない場合は執筆しない。必要なSpec承認、Plan作成、またはPlan承認を案内する。`design.md`に`status`がない場合は未承認の`draft`として扱う。
 

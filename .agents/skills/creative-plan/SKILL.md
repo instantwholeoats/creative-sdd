@@ -25,7 +25,8 @@ description: 承認済みCreative Specを、現在の実現方針、未来のWri
 2. `.creative/work/spec.md`を全文読む。
 3. 既存の`design.md`、`outline.md`、`tasks.md`があれば全文を読む。
 4. 既存原稿がある場合は、`.creative/work/continuity.md`、関連するUnit Summary、必要なcanon、対応する受け入れ済み原稿だけを読む。
-5. 最新のユーザー指示を既存artifactより優先する。
+5. Specの`work_type`に対応する`../../../profiles/fiction.md`または`../../../profiles/blog.md`を読み、現在の計画に関係する観点だけを参照する。
+6. 最新のユーザー指示を既存artifactより優先する。
 
 `spec.md`がない、frontmatterの`status`が`approved`でない、または`work_type`が`fiction`か`blog`でない場合は計画を生成・更新しない。必要なDiscoveryまたはSpec承認へ戻るよう案内する。
 
