@@ -1,0 +1,4 @@
+interface:
+  display_name: "Creative Status"
+  short_description: "既存artifactから創作工程の現在地と次の操作を表示します"
+  default_prompt: "$creative-status を使って、現在のプロジェクト状態を表示してください。"

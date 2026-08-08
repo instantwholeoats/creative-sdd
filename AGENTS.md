@@ -3,7 +3,7 @@
 ## 仕様とスコープ
 
 - `SPEC.md` をCreativeSDDの製品仕様の正本とする。設計や実装が競合する場合は`SPEC.md`を優先する。
-- 現在の実装フェーズはP2 — Stateである。ユーザーから次フェーズ開始の指示があるまでP3以降へ着手しない。
+- 現在の実装フェーズはP3 — Qualityである。ユーザーから次フェーズ開始の指示があるまでP4以降へ着手しない。
 - 現在指定されている実装フェーズの範囲だけを変更する。将来フェーズの機能を先回りして追加しない。
 - 将来の拡張だけを理由に抽象化、設定、依存関係、常駐処理を増やさない。Markdown、filesystem convention、Codex Agent Skillなど、要件を満たす最も単純な方法を優先する。
 
@@ -40,5 +40,18 @@
 - `continuity.md`ではCharacter KnowledgeとReader Knowledgeを別の見出しで管理し、推測で同一視しない。
 - Fiction Canonは長期的な整合性に必要なファイルだけを作る。原稿で成立した事実、ユーザーが明示的に確定した事実、未来の予定を区別し、予定をCanon化しない。
 - Unit Summaryは受け入れ済み原稿の圧縮された参照情報として扱い、原稿にない出来事や状態を追加しない。
-- P3のreview、revise、lint、status、およびP4のREADME、tests、fixtures、example projectを作成しない。
+- P4のREADME、tests、fixtures、example project、インストール機能を作成しない。
 - 状態管理はMarkdownとfilesystem searchで行い、外部DB、RAG、Embeddingを追加しない。
+
+## 品質管理規約
+
+- ReviewはEditorとして行い、原稿を変更しない。Review artifactの`verdict`と各指摘の`status`を、task完了や原稿受理と混同しない。
+- ReviewとRevisionは承認済みSpecをCreative Contractとして行う。Planがdrift reconciliationで`draft`へ戻っていても既存原稿には実行できるが、Specが未承認なら実行しない。
+- Review指摘は安定したID、`severity: BLOCKER | MAJOR | MINOR | OPTIONAL`、`status: proposed | approved | rejected | resolved`で管理する。
+- Revisionは`approved`な指摘だけを必要最小限の範囲で反映し、対象外の文章を維持する。主観的な改善だけを理由に全体を書き直さない。
+- `verdict: pass`でも、ユーザーがOPTIONAL指摘を明示的に承認した場合はRevisionできる。未適用のapproved指摘が残る間は`revision_status: applied`にしない。
+- Revision後は対応taskの`Acceptance`を`pending`にする。承認済み指摘をすべて適用できた場合だけReview artifactの`revision_status`を`applied`にし、Revisionを原稿受理とみなさない。
+- `revision_status`は`not_required | pending | applied | accepted`とし、Reviewの`verdict: pass | revise`とは別に管理する。
+- Revisionが明示的に受け入れられた後だけ、P2の状態同期を実行し、最後に`Acceptance: accepted`と`revision_status: accepted`を記録する。
+- lintはfrontmatter、heading、ID、path、artifact間の状態整合など決定論的な構造だけを検査する。文学的品質、面白さ、声、創造性を機械判定しない。
+- statusは既存のMarkdown artifactとlint結果を読み取り、現在状態と次に可能な操作を提示するだけで、創作内容や状態を変更しない。

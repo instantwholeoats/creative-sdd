@@ -1,0 +1,4 @@
+interface:
+  display_name: "Creative Revise"
+  short_description: "承認済みのReview指摘だけを原稿へ必要最小限に反映します"
+  default_prompt: "$creative-revise を使って、承認済みの指摘だけを原稿へ反映してください。"

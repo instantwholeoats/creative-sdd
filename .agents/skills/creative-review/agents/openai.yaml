@@ -1,0 +1,4 @@
+interface:
+  display_name: "Creative Review"
+  short_description: "原稿を変更せず契約・継続性・構造・編集面をレビューします"
+  default_prompt: "$creative-review を使って、対象Unitの原稿をレビューしてください。"

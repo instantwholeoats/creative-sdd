@@ -14,7 +14,7 @@ description: 承認済みCreative Specと承認済みPlanに従って一つのWr
 - `spec.md`、`brief.md`、受け入れ済み原稿を変更しない。
 - 一度に複数taskを執筆しない。
 - 対象外の原稿や、同一ファイル内の対象外Sectionを変更しない。
-- review、revision、lint、status、tests、fixturesなどP3以降のartifactや機能を作成しない。
+- Review artifactやRevision状態をこのSkillで作成・更新しない。P4のREADME、tests、fixtures、example project、インストール機能を作成しない。
 - 外部DB、RAG、Embeddingを使用しない。Markdown artifactと必要に応じたfilesystem searchだけを使う。
 
 ## ワークフロー
@@ -87,6 +87,8 @@ Contextの優先順位を次の順にする。
 - 最新のユーザー発言が、質問への同意やPlan承認ではなく、対象原稿そのものへの明確な受理であることを確認する。
 - 対象原稿を現在の会話で提示済みか確認できない場合や、文脈のない「OK」だけの場合は状態を更新しない。対象と要点を提示し、改めて明確な受理を求める。
 - 受理後の処理中は原稿本文を変更しない。Outlineとの差異を理由に原稿を修正しない。
+- 対象原稿のReviewに`revision_status: applied`がある場合は、このSkillで受理しない。`creative-revise`でRevision受理とP2状態同期を一体で行うよう案内する。
+- 対象原稿のReviewに未処理のBLOCKER、MAJOR、MINOR指摘がある場合は受理しない。`proposed`は承認または却下、`approved`はRevisionを先に行うよう案内する。すべて`rejected`なら、原稿を変更せずこのSkillで受理できる。
 - 対象taskの`Acceptance`がすでに`accepted`で、受理後に原稿が変更されていないなら、同じ原稿の状態同期を繰り返さない。同期済みであることを伝え、状態artifactと計画を変更せず終了する。受理後の変更が明示されている場合は`pending`へ戻し、現在の原稿について改めて明確な受理を確認する。
 
 ### 7. 受け入れ済み原稿をreconcileする

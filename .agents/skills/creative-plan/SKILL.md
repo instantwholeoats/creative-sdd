@@ -14,7 +14,7 @@ description: 承認済みCreative Specを、現在の実現方針、未来のWri
 - `design.md`のfrontmatterにある`status`を、3つのartifactから成るPlan全体の承認状態として扱う。`outline.md`と`tasks.md`に重複した状態を持たせない。
 - `spec.md`、`brief.md`、`manuscript/`を変更しない。
 - continuity、summaries、canonは参照するだけで、このSkillでは作成・更新しない。
-- review、revision、lint、status、tests、fixturesなどP3以降のartifactや機能を作成しない。
+- Review artifactやRevision状態をこのSkillで作成・更新しない。P4のREADME、tests、fixtures、example project、インストール機能を作成しない。
 - Specの意図的な未決定事項を、計画の都合だけで確定しない。
 
 ## ワークフロー
