@@ -1,0 +1,90 @@
+---
+name: creative-spec
+description: Discoveryで得たCreative Briefをfictionまたはblog向けのCreative Spec案へ変換し、明示的な人間の承認をfrontmatterへ反映する。briefの理解が十分になったとき、spec案を作成・修正するとき、または提示済みspecを承認するときに使う。
+---
+
+# Creative Spec
+
+`.creative/work/brief.md`から、作品全体を縛り過ぎないCreative Contractを作る。specは入力フォームではなく、対話で発見した意図と守るべき境界である。
+
+## 出力と境界
+
+- `.creative/work/spec.md`を作成または更新する。
+- `fiction`には`../../../templates/spec-fiction.md`、`blog`には`../../../templates/spec-blog.md`を使う。
+- テンプレートが見つからなければ、同じfrontmatterと作品種別に必要な最小構造を作る。
+- design、outline、tasks、原稿などP1以降のartifactを作らない。
+- ユーザーにspecを手書きさせない。
+
+## ワークフロー
+
+### 1. 入力状態を確認する
+
+1. `AGENTS.md`を読む。
+2. `.creative/work/brief.md`を全文読む。
+3. `.creative/work/spec.md`があれば全文を読む。
+4. 最新のユーザー指示を読み、既存artifactより優先する。
+
+briefが存在しない、作品種別が`fiction`か`blog`か判断できない、または`BLOCKING`が残っている場合はspecを生成しない。最新のユーザー指示だけで解消できなければ、`creative-discovery`で必要なDiscoveryを続けるよう案内する。
+
+### 2. Spec案を作る
+
+作品種別に対応するテンプレートを基礎に、Creative Contractとして意味のある内容だけを書く。
+
+- ユーザーが明示または承認した内容を契約の中心に置く。
+- `INFERRED`、`PROVISIONAL`、`OPEN`を確定事項のように書かない。
+- 意図的な創作余白を残す。
+- 未決定でも進められる事項は未決定として保持する。
+- 空欄を埋めるために新しい設定、人物、主張、根拠を創作しない。
+- 使わない見出しや空の項目は省略してよい。
+- 判断記録には重要な事項だけを、`[CONFIRMED]`、`[INFERRED]`、`[PROVISIONAL]`、`[OPEN]`で区別して残す。
+
+新規specのfrontmatterは必ず次の状態から始める。
+
+```yaml
+---
+status: draft
+work_type: fiction
+language: ja
+---
+```
+
+`work_type`は実際の作品種別に合わせる。ファイルが存在するだけでは`approved`にしない。
+
+### 3. Draftを提示する
+
+作成または変更したspecのうち、次をユーザーへ簡潔に提示する。
+
+- コアとなる意図または中心的な主張
+- 想定読者と読者体験
+- 重要な創作方針・制約
+- 暫定事項と意図的な未決定事項
+
+提示後、修正点または承認を求める。この段階では`status: draft`を維持する。
+
+### 4. 承認を処理する
+
+次をすべて満たす場合だけ`status: approved`へ変更する。
+
+1. `status: draft`のspecが存在する。
+2. その内容がユーザーへ提示済みである。
+3. ユーザーの最新発言が、そのspec全体への明確な承認である。
+4. `BLOCKING`な事項が残っていない。
+
+「これでいいです」「これで進めてください」「承認します」「OKです」「Looks good」「Use this」などを承認として認識してよい。ただし、質問への単なる同意や別の対象への「OK」をspec承認と解釈しない。
+
+修正依頼と承認が同時に来た場合は、意味が変わる修正を反映したdraftを再提示する。ユーザーがまだ見ていない内容を暗黙に承認済みとしない。
+
+承認時は本文を勝手に改善せず、frontmatterの`status`だけを変更する。承認を保存したことを明示する。
+
+### 5. 承認済みSpecを変更する
+
+現在の明示的なユーザー指示を承認済みspecより優先する。変更が作品の契約上の意味を変える場合は内容を更新し、`status: draft`へ戻して差分の要点を提示し、再承認を求める。
+
+契約上重大な変更には、少なくとも次を含む。
+
+- 作品種別、中心的な意図、テーマまたは主張
+- 想定読者、約束する読者体験
+- 主要人物、中心的対立、解決の方向性
+- POV、トーン、必須要素、避ける要素
+
+表記修正など意味を変えない変更では承認状態を維持してよい。判断が微妙なら`draft`へ戻す。

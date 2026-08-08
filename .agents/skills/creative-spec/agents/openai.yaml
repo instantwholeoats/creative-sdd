@@ -1,0 +1,4 @@
+interface:
+  display_name: "Creative Spec"
+  short_description: "Discoveryの理解を承認可能なCreative Specへ変換します"
+  default_prompt: "$creative-spec を使って、Discoveryの理解からCreative Spec案を作成してください。"

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Creative Discovery"
+  short_description: "対話から必要十分な創作仕様を発見し、briefに保存します"
+  default_prompt: "$creative-discovery を使って、曖昧な創作意図から今決めるべきことだけを整理してください。"
