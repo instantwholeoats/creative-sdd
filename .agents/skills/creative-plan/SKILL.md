@@ -13,7 +13,8 @@ description: 承認済みCreative Specを、現在の実現方針、未来のWri
 - 新規作成時はそれぞれ`../../../templates/design.md`、`../../../templates/outline.md`、`../../../templates/tasks.md`を基礎にする。
 - `design.md`のfrontmatterにある`status`を、3つのartifactから成るPlan全体の承認状態として扱う。`outline.md`と`tasks.md`に重複した状態を持たせない。
 - `spec.md`、`brief.md`、`manuscript/`を変更しない。
-- continuity、summaries、canon、review、reviseなどP2以降のartifactを作らない。
+- continuity、summaries、canonは参照するだけで、このSkillでは作成・更新しない。
+- review、revision、lint、status、tests、fixturesなどP3以降のartifactや機能を作成しない。
 - Specの意図的な未決定事項を、計画の都合だけで確定しない。
 
 ## ワークフロー
@@ -23,7 +24,8 @@ description: 承認済みCreative Specを、現在の実現方針、未来のWri
 1. `AGENTS.md`を読む。
 2. `.creative/work/spec.md`を全文読む。
 3. 既存の`design.md`、`outline.md`、`tasks.md`があれば全文を読む。
-4. 最新のユーザー指示を既存artifactより優先する。
+4. 既存原稿がある場合は、`.creative/work/continuity.md`、関連するUnit Summary、必要なcanon、対応する受け入れ済み原稿だけを読む。
+5. 最新のユーザー指示を既存artifactより優先する。
 
 `spec.md`がない、frontmatterの`status`が`approved`でない、または`work_type`が`fiction`か`blog`でない場合は計画を生成・更新しない。必要なDiscoveryまたはSpec承認へ戻るよう案内する。
 
@@ -69,6 +71,7 @@ Outlineの各Unitを、原則として一対一の実行可能なWriting Taskへ
 
 - 安定した連番IDと未完了チェックボックス`- [ ]`を使う。
 - `Goal`、`Boundary`、`Output`、`Outline unit`、`Depends`を記録する。
+- 新規taskには`Acceptance: pending`を記録する。`pending`は原稿の未受理、`accepted`は受理後の状態同期完了を表す。
 - 小説で必要なら`Required state`と`Expected resulting state`も記録する。
 - `Output`は必ず`manuscript/`配下にする。
 - 小説は原則として`manuscript/001.md`のような3桁連番、ブログは原則として`manuscript/article.md`を使う。
@@ -77,10 +80,14 @@ Outlineの各Unitを、原則として一対一の実行可能なWriting Taskへ
 
 ### 5. 既存計画を更新する
 
+- 優先順位は、ユーザーの明示的な現在の指示、受け入れられた原稿上の現実、成立済みCanon、承認済みSpec、Design、Outline、AIの暫定案の順とする。
 - 完了済みtaskのチェック状態と安定したIDを理由なく変更しない。
+- 既存taskの`Acceptance`は、原稿が明示的に改稿され再受理待ちになった場合を除き変更しない。この項目がない旧形式のtaskは`pending`とみなす。
 - 既存原稿を計画へ合わせるために変更しない。
-- 計画変更が完了済みtaskや既存原稿の意味を変える場合は、自動で書き換えず影響をユーザーへ提示する。
-- P2のreconciliationやnarrative drift管理へ進まない。
+- OutlineやtaskのExpected stateをCanonical Factとして扱わない。受け入れ済み原稿と競合する場合は原稿上の現実を優先する。
+- continuityではCharacter KnowledgeとReader Knowledgeを別の状態として読み、片方の知識をもう片方へ推測で移さない。
+- Narrative Driftを検出した場合は原稿を維持し、小さな下流変更を将来のOutline Unitと未完了taskへ反映する。Creative Contractまたは作品構造へ影響する変更は自動反映せず、影響をユーザーへ提示する。
+- 完了済みtaskや受け入れ済み原稿の意味を変える計画変更は行わない。
 - 承認済みPlanの実現方針、Unit、Task、境界、依存関係、Outputなど、執筆内容または順序へ影響する変更を行った場合は`status: draft`へ戻す。表記修正だけなら承認状態を維持してよい。
 
 ### 6. Plan案を提示する

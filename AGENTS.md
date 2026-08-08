@@ -3,7 +3,7 @@
 ## 仕様とスコープ
 
 - `SPEC.md` をCreativeSDDの製品仕様の正本とする。設計や実装が競合する場合は`SPEC.md`を優先する。
-- 現在の実装フェーズはP1 — Planning / Draftingである。ユーザーから次フェーズ開始の指示があるまでP2以降へ着手しない。
+- 現在の実装フェーズはP2 — Stateである。ユーザーから次フェーズ開始の指示があるまでP3以降へ着手しない。
 - 現在指定されている実装フェーズの範囲だけを変更する。将来フェーズの機能を先回りして追加しない。
 - 将来の拡張だけを理由に抽象化、設定、依存関係、常駐処理を増やさない。Markdown、filesystem convention、Codex Agent Skillなど、要件を満たす最も単純な方法を優先する。
 
@@ -28,3 +28,17 @@
 - 一度に執筆するのは一つのWriting Taskだけとし、対象外の原稿や同一ファイル内の対象外範囲を変更しない。
 - 原稿の作成または更新に成功した場合だけ、対応するtaskを完了扱いにする。
 - `outline.md`は未来の予定であり、原稿で成立した事実として扱わない。
+
+## 状態管理規約
+
+- 原稿がユーザーに受け入れられた後だけ、原稿から状態変化を抽出し、`continuity.md`、Unit Summary、必要なfiction canon、将来のOutlineをreconcileする。
+- `tasks.md`ではチェックボックスの完了と原稿受理を分け、`Acceptance: pending | accepted`で管理する。この項目がない旧形式のtaskは`pending`とみなす。
+- `Acceptance`は必要な状態同期がすべて完了した最後にだけ`accepted`にする。すでに`accepted`で受理後に変更されていない原稿は再同期せず、同じ受理操作を冪等に扱う。原稿を変更した場合は`pending`へ戻す。
+- 優先順位は、ユーザーの明示的な現在の指示、受け入れられた原稿上の現実、成立済みCanon、承認済みSpec、Design、Outline、AIの暫定案の順とする。
+- Narrative Driftを検出しても、原稿をOutlineへ合わせるために自動修正しない。上位制約に反しない受け入れ済み原稿を尊重し、将来の計画側を調整する。
+- OutlineとTaskの`Expected resulting state`は未来の予定であり、Canonical Factとして扱わない。
+- `continuity.md`ではCharacter KnowledgeとReader Knowledgeを別の見出しで管理し、推測で同一視しない。
+- Fiction Canonは長期的な整合性に必要なファイルだけを作る。原稿で成立した事実、ユーザーが明示的に確定した事実、未来の予定を区別し、予定をCanon化しない。
+- Unit Summaryは受け入れ済み原稿の圧縮された参照情報として扱い、原稿にない出来事や状態を追加しない。
+- P3のreview、revise、lint、status、およびP4のREADME、tests、fixtures、example projectを作成しない。
+- 状態管理はMarkdownとfilesystem searchで行い、外部DB、RAG、Embeddingを追加しない。

@@ -1,4 +1,4 @@
 interface:
   display_name: "Creative Draft"
-  short_description: "計画済みの単一Writing Taskを原稿として執筆します"
+  short_description: "単一Taskを執筆し、受理後の物語状態を整合させます"
   default_prompt: "$creative-draft を使って、次の未完了Writing Taskを執筆してください。"

@@ -8,6 +8,6 @@
   - Output: manuscript/001.md
   - Outline unit: Unit 001
   - Depends: none
+  - Acceptance: pending
   - Required state:
   - Expected resulting state:
-
