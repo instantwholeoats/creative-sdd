@@ -1,0 +1,4 @@
+interface:
+  display_name: "Creative Plan"
+  short_description: "承認済みSpecを実行可能な執筆計画へ段階的に変換します"
+  default_prompt: "$creative-plan を使って、承認済みCreative Specから執筆計画を作成してください。"
